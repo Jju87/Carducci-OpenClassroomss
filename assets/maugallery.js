@@ -155,15 +155,13 @@
         }
       });
       next =
-        imagesCollection[index -1] || // Correction du bug avec rajout de -1 sur index
+        imagesCollection[index -1] ||
         imagesCollection[imagesCollection.length - 1];
-        //cette condition ternaire vérifie si l'index est égal à 0, si oui, on affiche la dernière image du tableau
-        // sinon on affiche l'image précédente grâce à length - 1
       $(".lightboxImage").attr("src", $(next).attr("src"));
     },
     nextImage() {
       console.log("nextImage clicked")
-      let activeImage = index;
+      let activeImage = null;
       $("img.gallery-item").each(function() {
         if ($(this).attr("src") === $(".lightboxImage").attr("src")) {
           activeImage = $(this);
@@ -196,7 +194,7 @@
           index = i;
         }
       });
-      next = imagesCollection[index + 1] || imagesCollection[0]; // Correction du bug avec rajout de +1 sur index
+      next = imagesCollection[index + 1] || imagesCollection[0];
       $(".lightboxImage").attr("src", $(next).attr("src"));
     },
     createLightBox(gallery, lightboxId, navigation) {
