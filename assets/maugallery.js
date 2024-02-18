@@ -120,6 +120,7 @@
       $(`#${lightboxId}`).modal("toggle");
     },
     prevImage() {
+      console.log("prevImage clicked")
       let activeImage = null;
       $("img.gallery-item").each(function() {
         if ($(this).attr("src") === $(".lightboxImage").attr("src")) {
@@ -154,12 +155,15 @@
         }
       });
       next =
-        imagesCollection[index] ||
+        imagesCollection[index -1] || // Correction du bug avec rajout de -1 sur index
         imagesCollection[imagesCollection.length - 1];
+        //cette condition ternaire vérifie si l'index est égal à 0, si oui, on affiche la dernière image du tableau
+        // sinon on affiche l'image précédente grâce à length - 1
       $(".lightboxImage").attr("src", $(next).attr("src"));
     },
     nextImage() {
-      let activeImage = null;
+      console.log("nextImage clicked")
+      let activeImage = index;
       $("img.gallery-item").each(function() {
         if ($(this).attr("src") === $(".lightboxImage").attr("src")) {
           activeImage = $(this);
@@ -192,7 +196,7 @@
           index = i;
         }
       });
-      next = imagesCollection[index] || imagesCollection[0];
+      next = imagesCollection[index + 1] || imagesCollection[0]; // Correction du bug avec rajout de +1 sur index
       $(".lightboxImage").attr("src", $(next).attr("src"));
     },
     createLightBox(gallery, lightboxId, navigation) {
@@ -260,4 +264,4 @@
       });
     }
   };
-})(jQuery);
+})(jQuery); 
